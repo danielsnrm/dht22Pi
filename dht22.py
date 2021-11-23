@@ -20,7 +20,7 @@ def printDateTime():
     now = datetime.now()
     return  ('[' + (now.strftime("%d/%m/%Y")) + ' - '  + (now.strftime("%H:%M:%S")) + ']')
 def getSensorData():
-   RH, T = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 17)
+   RH, T = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, 4)
    return (str(RH), str(T))
 def main():
     log = open ("/home/pi/Documents/logs/dht22.log", "a")
