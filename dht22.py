@@ -26,7 +26,7 @@ def main():
     log = open ("/home/pi/Documents/logs/dht22.log", "a")
     print(printDateTime() + ' Arrancando...')
     log.write(printDateTime() + ' Arrancando...' + '\n')
-    baseURL = 'https://api.thingspeak.com/update?api_key=%s' % myAPI
+    
     while True:
        try:
         print(printDateTime() + ' Intentando obtener datos del sensor')
@@ -34,14 +34,7 @@ def main():
         RH, T = getSensorData()
         print(printDateTime() + ' Intento (RH ,T): (' + str(RH) + ',' + str(T) + ')')
         log.write(printDateTime() + ' Intento (RH ,T): (' + str(RH) + ',' + str(T) + ')' + '\n')
-        print(printDateTime() + ' Se va a intentar subir los datos a ThingSpeak')
-        log.write(printDateTime() + ' Se va a intentar subir los datos a ThingSpeak' + '\n')
-        print(' Se utilizara: ' + baseURL + "&field1=%s&field2=%s" % (str(T),str(RH)))
-        log.write(printDateTime() + ' Se utilizara: ' + baseURL + "&field1=%s&field2=%s" % (str(T),str(RH)) + '\n')
-        f = urllib2.urlopen(baseURL + "&field1=%s&field2=%s" % (str(T), str(RH)))
-        print(printDateTime() + ' Resultado: ' + f.read())
         log.write(printDateTime() + ' Resultado: ' + f.read() + '\n')
-        f.close(900000)
         log.close
         sleep() #uploads DHT22 sensor values every 5 minutes (300)
        except:
